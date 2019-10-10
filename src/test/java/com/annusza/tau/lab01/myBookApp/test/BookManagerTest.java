@@ -53,5 +53,21 @@ public class BookManagerTest {
 		assertEquals(bookManagerImpl.getBookById(2).getTitle(), maus.getTitle());
 
 	}
+	
+	@Test
+	public void deleteBookShouldDeleteIndicatedBook() {
+		// TU
+		
+//		Book howl = new Book();
+//		howl.setId(3);
+//		howl.setAuthorName("Diane Wynne");
+//		howl.setAuthorSurname("Jones");
+//		howl.setTitle("Howl's Moving Castle");
+//		howl.setYearOfPublication(1990);
+//
+//		
+//		bookManagerImpl.addBook(howl);
+//		bookManagerImpl.deleteBook(3);
+	}
 
 }
