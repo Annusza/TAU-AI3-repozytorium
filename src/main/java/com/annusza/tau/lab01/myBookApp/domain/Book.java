@@ -3,18 +3,18 @@ package com.annusza.tau.lab01.myBookApp.domain;
 
 public class Book {
 
-	protected Long id;
+	private int id;
 	private String authorName;
 	private String authorSurname;
 	private String title;
 	private int yearOfPublication;
 
-	public Long getId() {
+	public int getId() {
 
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(int id) {
 
 		this.id = id;
 	}
