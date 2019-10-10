@@ -28,7 +28,16 @@ public class BookManagerImpl implements BookManager {
 
 	public void updateBook(Book book) throws Exception {
 
-		// TODO Auto-generated method stub
+		Book bookToUpdate = getBookById(book.getId());
+		if (bookToUpdate != null) {
+
+			bookToUpdate.setAuthorName(book.getAuthorName());
+			bookToUpdate.setAuthorSurname(book.getAuthorSurname());
+			bookToUpdate.setTitle(book.getTitle());
+			bookToUpdate.setId(bookToUpdate.getId());
+			bookToUpdate.setYearOfPublication(book.getYearOfPublication());
+
+		}
 
 	}
 

@@ -1,7 +1,10 @@
 package com.annusza.tau.lab01.myBookApp.test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+
+import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -64,12 +67,31 @@ public class BookManagerTest {
 		howl.setAuthorSurname("Jones");
 		howl.setTitle("Howl's Moving Castle");
 		howl.setYearOfPublication(1990);
-		
+
 		bookManagerImpl.addBook(howl);
 
-		bookManagerImpl.deleteBook(3);;
+		bookManagerImpl.deleteBook(3);
+
 		assertNull(bookManagerImpl.getBookById(3));
+
+	}
+
+	@Test
+	public void updateBookShouldChangeIndicatedBook() throws Exception {
+
+		Book macbeth = new Book();
+		macbeth.setId(1);
+		macbeth.setAuthorName("William");
+		macbeth.setAuthorSurname("Shakespeare");
+		macbeth.setTitle("Hamlet");
+		macbeth.setYearOfPublication(1970);
+		bookManagerImpl.addBook(macbeth);
 		
+		Book bookToUpdate = bookManagerImpl.getBookById(1);
+		bookToUpdate.setTitle("Macbeth");
+		String title = "Macbeth";
+		
+		assertEquals(title, bookManagerImpl.getBookById(1).getTitle());
 	}
 
 }
