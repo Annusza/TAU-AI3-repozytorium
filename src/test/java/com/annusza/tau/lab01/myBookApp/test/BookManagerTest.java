@@ -23,10 +23,26 @@ public class BookManagerTest {
 	}
 
 	@Test
+	public void getBookByIdShouldReturnBookWithIndicatedId() {
+
+		Book persepolis = new Book();
+		persepolis.setId(1);
+		persepolis.setAuthorName("Marjane");
+		persepolis.setAuthorSurname("Satrapi");
+		persepolis.setTitle("Persepolis");
+		persepolis.setYearOfPublication(2005);
+
+		bookManagerImpl.addBook(persepolis);
+
+		assertEquals(bookManagerImpl.getBookById(1).getId(), 1);
+
+	}
+
+	@Test
 	public void addBookShouldAddNewBook() {
 
 		Book maus = new Book();
-		maus.setId(1);
+		maus.setId(2);
 		maus.setAuthorName("Art");
 		maus.setAuthorSurname("Spiegelman");
 		maus.setTitle("Maus");
@@ -34,7 +50,7 @@ public class BookManagerTest {
 
 		bookManagerImpl.addBook(maus);
 
-		assertEquals(bookManagerImpl.getBookById(1).getTitle(), maus.getTitle());
+		assertEquals(bookManagerImpl.getBookById(2).getTitle(), maus.getTitle());
 
 	}
 
