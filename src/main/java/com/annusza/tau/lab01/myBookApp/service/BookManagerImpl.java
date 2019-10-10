@@ -9,13 +9,13 @@ public class BookManagerImpl implements BookManager {
 
 	List<Book> books = new ArrayList<Book>();
 
-	public void addBook(Book book) {
+	public void addBook(Book book) throws Exception {
 
 		books.add(book);
 
 	}
 
-	public Book getBookById(int id) {
+	public Book getBookById(int id) throws Exception {
 
 		for (Book book : books) {
 			if (book.getId() == id) {
@@ -26,19 +26,22 @@ public class BookManagerImpl implements BookManager {
 		return null;
 	}
 
-	public void updateBook(Book book) {
+	public void updateBook(Book book) throws Exception {
 
 		// TODO Auto-generated method stub
 
 	}
 
-	public void deleteBook(int id) {
+	public void deleteBook(int id) throws Exception {
 
-		// TODO Auto-generated method stub
+		Book book = getBookById(id);
+		if (book != null) {
+			books.remove(book);
+		}
 
 	}
 
-	public List<Book> getAllGames() {
+	public List<Book> getAllBooks() throws Exception {
 
 		// TODO Auto-generated method stub
 		return null;

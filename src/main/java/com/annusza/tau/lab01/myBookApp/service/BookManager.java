@@ -6,10 +6,10 @@ import com.annusza.tau.lab01.myBookApp.domain.Book;
 
 public interface BookManager {
 	
-	public void addBook(Book book);
-	public Book getBookById(int id);
-	public void updateBook(Book book);
-	public void deleteBook(int id);
-	public List<Book> getAllGames();
+	public void addBook(Book book) throws Exception;
+	public Book getBookById(int id) throws Exception;
+	public void updateBook(Book book) throws Exception;
+	public void deleteBook(int id) throws Exception;
+	public List<Book> getAllBooks() throws Exception;
 
 }

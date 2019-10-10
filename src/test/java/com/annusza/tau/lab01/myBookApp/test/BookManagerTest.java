@@ -1,6 +1,7 @@
 package com.annusza.tau.lab01.myBookApp.test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -23,7 +24,7 @@ public class BookManagerTest {
 	}
 
 	@Test
-	public void getBookByIdShouldReturnBookWithIndicatedId() {
+	public void getBookByIdShouldReturnBookWithIndicatedId() throws Exception {
 
 		Book persepolis = new Book();
 		persepolis.setId(1);
@@ -39,7 +40,7 @@ public class BookManagerTest {
 	}
 
 	@Test
-	public void addBookShouldAddNewBook() {
+	public void addBookShouldAddNewBook() throws Exception {
 
 		Book maus = new Book();
 		maus.setId(2);
@@ -53,21 +54,22 @@ public class BookManagerTest {
 		assertEquals(bookManagerImpl.getBookById(2).getTitle(), maus.getTitle());
 
 	}
-	
+
 	@Test
-	public void deleteBookShouldDeleteIndicatedBook() {
-		// TU
+	public void deleteBookShouldDeleteIndicatedBook() throws Exception {
+
+		Book howl = new Book();
+		howl.setId(3);
+		howl.setAuthorName("Diane Wynne");
+		howl.setAuthorSurname("Jones");
+		howl.setTitle("Howl's Moving Castle");
+		howl.setYearOfPublication(1990);
 		
-//		Book howl = new Book();
-//		howl.setId(3);
-//		howl.setAuthorName("Diane Wynne");
-//		howl.setAuthorSurname("Jones");
-//		howl.setTitle("Howl's Moving Castle");
-//		howl.setYearOfPublication(1990);
-//
-//		
-//		bookManagerImpl.addBook(howl);
-//		bookManagerImpl.deleteBook(3);
+		bookManagerImpl.addBook(howl);
+
+		bookManagerImpl.deleteBook(3);;
+		assertNull(bookManagerImpl.getBookById(3));
+		
 	}
 
 }
