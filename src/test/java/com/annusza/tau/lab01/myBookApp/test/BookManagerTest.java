@@ -91,7 +91,6 @@ public class BookManagerTest {
 		Book bookToUpdate = bookManagerImpl.getBookById(1);
 		bookToUpdate.setTitle("Macbeth");
 		bookManagerImpl.addBook(bookToUpdate);
-		//String title = "Macbeth";
 
 		assertEquals(bookToUpdate.getTitle(), bookManagerImpl.getBookById(1).getTitle());
 	}
