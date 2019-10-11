@@ -39,6 +39,7 @@ public class BookManagerTest {
 		bookManagerImpl.addBook(persepolis);
 
 		assertEquals(bookManagerImpl.getBookById(1).getId(), 1);
+		assertEquals(persepolis.getTitle(), bookManagerImpl.getBookById(1).getTitle());
 
 	}
 
@@ -61,18 +62,18 @@ public class BookManagerTest {
 	@Test
 	public void deleteBookShouldDeleteIndicatedBook() throws Exception {
 
+		final int bookId = 3;
 		Book howl = new Book();
-		howl.setId(3);
+		howl.setId(bookId);
 		howl.setAuthorName("Diane Wynne");
 		howl.setAuthorSurname("Jones");
 		howl.setTitle("Howl's Moving Castle");
 		howl.setYearOfPublication(1990);
 
 		bookManagerImpl.addBook(howl);
+		bookManagerImpl.deleteBook(bookId);
 
-		bookManagerImpl.deleteBook(3);
-
-		assertNull(bookManagerImpl.getBookById(3));
+		assertNull(bookManagerImpl.getBookById(bookId));
 
 	}
 
@@ -86,12 +87,13 @@ public class BookManagerTest {
 		macbeth.setTitle("Hamlet");
 		macbeth.setYearOfPublication(1970);
 		bookManagerImpl.addBook(macbeth);
-		
+
 		Book bookToUpdate = bookManagerImpl.getBookById(1);
 		bookToUpdate.setTitle("Macbeth");
-		String title = "Macbeth";
-		
-		assertEquals(title, bookManagerImpl.getBookById(1).getTitle());
+		bookManagerImpl.addBook(bookToUpdate);
+		//String title = "Macbeth";
+
+		assertEquals(bookToUpdate.getTitle(), bookManagerImpl.getBookById(1).getTitle());
 	}
 
 }
