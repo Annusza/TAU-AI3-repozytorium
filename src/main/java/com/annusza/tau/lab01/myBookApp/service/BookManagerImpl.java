@@ -3,12 +3,13 @@ package com.annusza.tau.lab01.myBookApp.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.annusza.tau.lab01.myBookApp.domain.Book;
+import com.annusza.tau.lab01.myBookApp.domain.*;
 
 public class BookManagerImpl implements BookManager {
 
 	List<Book> books = new ArrayList<Book>();
 
+	
 	public void addBook(Book book) throws Exception {
 
 		books.add(book);
@@ -49,11 +50,11 @@ public class BookManagerImpl implements BookManager {
 		}
 
 	}
-
+	
 	public List<Book> getAllBooks() throws Exception {
 
-		// TODO Auto-generated method stub
-		return null;
+		return books;
+
 	}
 
 }
