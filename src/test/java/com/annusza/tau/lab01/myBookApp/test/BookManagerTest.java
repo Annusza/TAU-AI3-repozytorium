@@ -1,10 +1,7 @@
 package com.annusza.tau.lab01.myBookApp.test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
-
-import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -38,7 +35,7 @@ public class BookManagerTest {
 
 		bookManagerImpl.addBook(persepolis);
 
-		assertEquals(bookManagerImpl.getBookById(1).getId(), 1);
+		assertEquals(bookManagerImpl.getBookById(1).getId(), persepolis.getId());
 		assertEquals(persepolis.getTitle(), bookManagerImpl.getBookById(1).getTitle());
 
 	}
@@ -89,10 +86,15 @@ public class BookManagerTest {
 		bookManagerImpl.addBook(macbeth);
 
 		Book bookToUpdate = bookManagerImpl.getBookById(1);
+		
+		
 		bookToUpdate.setTitle("Macbeth");
-		bookManagerImpl.updateBook(bookToUpdate);
+		macbeth.setTitle(bookToUpdate.getTitle());
+		bookManagerImpl.updateBook(macbeth);
 
-		assertEquals(bookToUpdate.getTitle(), bookManagerImpl.getBookById(1).getTitle());
+		assertEquals( bookManagerImpl.getBookById(1).getTitle(), bookToUpdate.getTitle());
 	}
+
+	
 
 }

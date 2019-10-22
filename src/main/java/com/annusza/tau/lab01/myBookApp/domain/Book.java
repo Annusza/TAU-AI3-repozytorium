@@ -1,23 +1,20 @@
 package com.annusza.tau.lab01.myBookApp.domain;
 
+import java.time.LocalDateTime;
 
-public class Book {
+public class Book extends TheTime {
 
-	private int id;
+	private Integer id;
 	private String authorName;
 	private String authorSurname;
 	private String title;
-	private int yearOfPublication;
+	private Integer yearOfPublication;
 
-	public int getId() {
+	private TheTime time;
 
-		return id;
-	}
-
-	public void setId(int id) {
-
-		this.id = id;
-	}
+	// private LocalDateTime timeOfLastReadTheRow;
+	// private LocalDateTime timeOfRowCreation;
+	// private LocalDateTime timeOfRowRevision;
 
 	public String getAuthorName() {
 
@@ -49,14 +46,45 @@ public class Book {
 		this.title = title;
 	}
 
-	public int getYearOfPublication() {
+	public Integer getYearOfPublication() {
 
 		return yearOfPublication;
 	}
 
-	public void setYearOfPublication(int yearOfPublication) {
+	public void setYearOfPublication(Integer yearOfPublication) {
 
 		this.yearOfPublication = yearOfPublication;
+	}
+
+	public void setId(Integer id) {
+
+		this.id = id;
+	}
+
+	public Integer getId() {
+
+		return id;
+	}
+
+	public TheTime getTime() {
+
+		return time;
+	}
+
+	public void setTime(TheTime time) {
+
+		this.time = time;
+	}
+
+	@Override
+	public boolean equals(Object object) {
+
+		Book other = (Book) object;
+		boolean deliver = other.getAuthorName().equals(this.getAuthorName()) && other.getAuthorSurname().equals(this.getAuthorSurname())
+				&& other.getTitle().equals(this.getTitle()) && ((other.getId() == this.getId()) || (other.getId() == this.getId().intValue()))
+				&& ((other.getYearOfPublication() == this.getYearOfPublication())
+						|| (other.getYearOfPublication().intValue() == this.getYearOfPublication().intValue()));
+		return deliver;
 	}
 
 }
