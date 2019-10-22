@@ -1,11 +1,11 @@
-package com.annusza.tau.lab01.myBookApp.service;
+package com.annusza.tau.lab.myBookApp.service;
 
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
-import com.annusza.tau.lab01.myBookApp.domain.Book;
-import com.annusza.tau.lab01.myBookApp.domain.TheTime;
+import com.annusza.tau.lab.myBookApp.domain.Book;
+import com.annusza.tau.lab.myBookApp.domain.TheTime;
 
 public interface BookManager {
 
@@ -21,7 +21,9 @@ public interface BookManager {
 
 	public void setTimeOfRead(LocalDateTime mockDate, TheTime theTime);
 
-	public void setTimeOfCreation(Book book);
+	public void setTimeOfCreation(Book book) throws Exception;
 
 	public LocalDateTime getActualDate() throws Exception;
+	
+	public void setTimeOfLastUpdate(Book book) throws Exception;
 }

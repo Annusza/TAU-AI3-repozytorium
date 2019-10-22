@@ -1,4 +1,4 @@
-package com.annusza.tau.lab01.myBookApp.domain;
+package com.annusza.tau.lab.myBookApp.domain;
 
 import java.time.LocalDateTime;
 
