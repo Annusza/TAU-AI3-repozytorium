@@ -1,10 +1,10 @@
-package com.annusza.tau.lab.myBookApp.service;
+package com.annusza.tau.lab01.myBookApp.service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.annusza.tau.lab.myBookApp.domain.*;
+import com.annusza.tau.lab01.myBookApp.domain.*;
 
 public class BookManagerImpl implements BookManager {
 

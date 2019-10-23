@@ -1,7 +1,7 @@
-package com.annusza.tau.lab.myBookApp.test;
+package com.annusza.tau.lab01.myBookApp.test;
 
-import com.annusza.tau.lab.myBookApp.domain.Book;
-import com.annusza.tau.lab.myBookApp.service.BookManagerImpl;
+import com.annusza.tau.lab01.myBookApp.domain.Book;
+import com.annusza.tau.lab01.myBookApp.service.BookManagerImpl;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
