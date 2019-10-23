@@ -13,7 +13,7 @@ public class BookManagerImpl implements BookManager {
 	@Override
 	public void addBook(Book book) throws Exception {
 
-		setTimeOfCreation(book);
+		setDateTimeOfCreation(book);
 		books.add(book);
 
 	}
@@ -25,7 +25,7 @@ public class BookManagerImpl implements BookManager {
 			if (book.getId() == id) {
 
 				Book book2 = clone(book);
-				setTimeOfRead(book2);
+				setDateTimeOfRead(book2);
 				return book2;
 			}
 		}
@@ -33,7 +33,7 @@ public class BookManagerImpl implements BookManager {
 	}
 
 	@Override
-	public void setTimeOfRead(Book book) throws Exception {
+	public void setDateTimeOfRead(Book book) throws Exception {
 
 		book.setReadRowTime(getCurrentDateTime());
 
@@ -48,9 +48,9 @@ public class BookManagerImpl implements BookManager {
 		book2.setAuthorSurname(book.getAuthorSurname());
 		book2.setTitle(book.getTitle());
 		book2.setYearOfPublication(book.getYearOfPublication());
-		book2.setCreateRowTime(book.getCreateRowTime());
-		book2.setUpdateRowTime(book.getUpdateRowTime());
-		book2.setReadRowTime(book.getReadRowTime());
+		book2.setCreateRowTime(book.getCreateRowDateTime());
+		book2.setUpdateRowTime(book.getUpdateRowDateTime());
+		book2.setReadRowTime(book.getReadRowDateTime());
 
 		// setTimeOfRead(book2);
 		return book2;
@@ -73,6 +73,7 @@ public class BookManagerImpl implements BookManager {
 
 		for (Book book : books) {
 			Book cloneBook = clone(book);
+			setDateTimeOfRead(cloneBook);
 			listOfReturnedBooks.add(cloneBook);
 
 		}
@@ -102,11 +103,11 @@ public class BookManagerImpl implements BookManager {
 			bookToUpdate.setId(book.getId());
 			bookToUpdate.setYearOfPublication(book.getYearOfPublication());
 			bookToUpdate.setTime(book.getTime());
-			bookToUpdate.setCreateRowTime(book.getCreateRowTime());
-			bookToUpdate.setUpdateRowTime(book.getUpdateRowTime());
-			bookToUpdate.setReadRowTime(book.getReadRowTime());
+			bookToUpdate.setCreateRowTime(book.getCreateRowDateTime());
+			bookToUpdate.setUpdateRowTime(book.getUpdateRowDateTime());
+			bookToUpdate.setReadRowTime(book.getReadRowDateTime());
 
-			setTimeOfUpdate(bookToUpdate);
+			setDateTimeOfUpdate(bookToUpdate);
 
 		} else {
 
@@ -116,7 +117,7 @@ public class BookManagerImpl implements BookManager {
 	}
 
 	@Override
-	public void setTimeOfUpdate(Book book) {
+	public void setDateTimeOfUpdate(Book book) {
 
 		book.setUpdateRowTime(getCurrentDateTime());
 
@@ -129,7 +130,7 @@ public class BookManagerImpl implements BookManager {
 	}
 
 	@Override
-	public void setTimeOfCreation(Book book) throws Exception {
+	public void setDateTimeOfCreation(Book book) throws Exception {
 
 		book.setCreateRowTime(getCurrentDateTime());
 

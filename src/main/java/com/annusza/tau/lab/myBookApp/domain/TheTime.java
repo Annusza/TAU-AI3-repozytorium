@@ -9,7 +9,7 @@ public abstract class TheTime {
 	private LocalDateTime updateRowTime;
 	private LocalDateTime readRowTime;
 	
-	public LocalDateTime getCreateRowTime() {
+	public LocalDateTime getCreateRowDateTime() {
 	
 		return createRowTime;
 	}
@@ -19,7 +19,7 @@ public abstract class TheTime {
 		this.createRowTime = createRowTime;
 	}
 	
-	public LocalDateTime getUpdateRowTime() {
+	public LocalDateTime getUpdateRowDateTime() {
 	
 		return updateRowTime;
 	}
@@ -29,7 +29,7 @@ public abstract class TheTime {
 		this.updateRowTime = updateRowTime;
 	}
 	
-	public LocalDateTime getReadRowTime() {
+	public LocalDateTime getReadRowDateTime() {
 	
 		return readRowTime;
 	}

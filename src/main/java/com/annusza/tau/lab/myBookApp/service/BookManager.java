@@ -19,11 +19,11 @@ public interface BookManager {
 
 	public List<Book> getAllBooks() throws Exception;
 
-	public void setTimeOfRead(Book book) throws Exception;
+	public void setDateTimeOfRead(Book book) throws Exception;
 
-	public void setTimeOfCreation(Book book) throws Exception;
+	public void setDateTimeOfCreation(Book book) throws Exception;
 
 	public LocalDateTime getCurrentDateTime() throws Exception;
 
-	public void setTimeOfUpdate(Book book) throws Exception;
+	public void setDateTimeOfUpdate(Book book) throws Exception;
 }

@@ -4,9 +4,11 @@ import com.annusza.tau.lab.myBookApp.domain.Book;
 import com.annusza.tau.lab.myBookApp.service.BookManagerImpl;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -60,8 +62,8 @@ public class BookManagerMockitoTest {
 		bookManagerImpl.addBook(book1);
 
 		Book book2 = bookManagerImpl.getBookById(id);
-		verify(bookManagerImpl, times(1)).setTimeOfCreation(book1);
-		Assert.assertNotNull("Zapisywany jest czas dodania rektordu do bazy", book2.getCreateRowTime());
+		verify(bookManagerImpl, times(1)).setDateTimeOfCreation(book1);
+		Assert.assertNotNull("Zapisywany jest czas dodania rektordu do bazy", book2.getCreateRowDateTime());
 
 	}
 
@@ -87,16 +89,16 @@ public class BookManagerMockitoTest {
 
 		// weryfikacja 1) czy BookManagerImpl razy jeden zawołał setTimeOfUpdate
 		// z argumentem book
-		verify(bookManagerImpl, times(1)).setTimeOfUpdate(book);
+		verify(bookManagerImpl, times(1)).setDateTimeOfUpdate(book);
 
 		// weryfikacja 2) metoda ustawiła updateRowTime
-		Assert.assertNotNull("Ustawiona jest data aktualizacji rekordu", book.getUpdateRowTime());
+		Assert.assertNotNull("Ustawiona jest data aktualizacji rekordu", book.getUpdateRowDateTime());
 
 	}
 
-	// 2 - test sposobu ustawiania daty przy odczycie rekordu
+	// 2a - test sposobu ustawiania daty przy odczycie rekordu getById
 	@Test
-	public void mockitoTestOfLastReadRowTimeDuringUsingGetBookById() throws Exception {
+	public void mockitoTestOfLastReadRowDateTimeDuringUsingGetBookById() throws Exception {
 
 		BookManagerImpl bookManagerImpl = spy(BookManagerImpl.class);
 		when((bookManagerImpl).getCurrentDateTime()).thenReturn(mockDate);
@@ -109,12 +111,56 @@ public class BookManagerMockitoTest {
 		anneOfGreenGables.setTitle("Annie of the Green Gables");
 		anneOfGreenGables.setYearOfPublication(1997);
 		bookManagerImpl.addBook(anneOfGreenGables);
-		
+
 		Book nextBook = bookManagerImpl.getBookById(id);
 
-		verify(bookManagerImpl, times(1)).setTimeOfRead(nextBook);
-		
-		Assert.assertNotNull("Ustawiona jest data odczytu rekordu", nextBook.getReadRowTime());
+		verify(bookManagerImpl, times(1)).setDateTimeOfRead(nextBook);
+
+		Assert.assertNotNull("Ustawiona jest data odczytu rekordu", nextBook.getReadRowDateTime());
+	}
+
+	// 2b - test sposobu ustawiania daty przy odczycie rekordu getById
+	@Test
+	public void mockitoTestOfLastReadRowDateTimeDuringUsingGetAll() throws Exception {
+
+		BookManagerImpl bookManagerImpl = spy(BookManagerImpl.class);
+		when((bookManagerImpl).getCurrentDateTime()).thenReturn(mockDate);
+
+		Book anneOfAvonlea = new Book();
+		final int id4 = 4;
+		anneOfAvonlea.setId(id4);
+		anneOfAvonlea.setAuthorName("Lucy Maud");
+		anneOfAvonlea.setAuthorSurname("Montgomery");
+		anneOfAvonlea.setTitle("Annie of Avonlea");
+		anneOfAvonlea.setYearOfPublication(1990);
+		bookManagerImpl.addBook(anneOfAvonlea);
+
+		Book magicForMarigold = new Book();
+		final int id5 = 5;
+		magicForMarigold.setId(id5);
+		magicForMarigold.setAuthorName("Lucy Maud");
+		magicForMarigold.setAuthorSurname("Montgomery");
+		magicForMarigold.setTitle("Magic for Marigold");
+		magicForMarigold.setYearOfPublication(1989);
+		bookManagerImpl.addBook(magicForMarigold);
+
+		Book theBlythesAreQuoted = new Book();
+		final int id6 = 6;
+		theBlythesAreQuoted.setId(id6);
+		theBlythesAreQuoted.setAuthorName("Lucy Maud");
+		theBlythesAreQuoted.setAuthorSurname("Montgomery");
+		theBlythesAreQuoted.setTitle("The Blythes are quoted");
+		theBlythesAreQuoted.setYearOfPublication(2009);
+		bookManagerImpl.addBook(theBlythesAreQuoted);
+
+		List<Book> booksOfLucyMaudMontgomety = bookManagerImpl.getAllBooks();
+
+		for (Book book : booksOfLucyMaudMontgomety) {
+			verify(bookManagerImpl, times(1)).setDateTimeOfRead(book);
+			Assert.assertNotNull("Ustawiona jest data odczytu rekordu", book.getReadRowDateTime());
+
+		}
+
 	}
 
 }
