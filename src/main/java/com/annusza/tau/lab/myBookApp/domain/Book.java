@@ -12,10 +12,6 @@ public class Book extends TheTime {
 
 	private TheTime time;
 
-	// private LocalDateTime timeOfLastReadTheRow;
-	// private LocalDateTime timeOfRowCreation;
-	// private LocalDateTime timeOfRowRevision;
-
 	public String getAuthorName() {
 
 		return authorName;
