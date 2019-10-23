@@ -78,14 +78,15 @@ public class BookManagerTest {
 	public void updateBookShouldChangeIndicatedBook() throws Exception {
 
 		Book macbeth = new Book();
-		macbeth.setId(1);
+		final int bookId = 1;
+		macbeth.setId(bookId);
 		macbeth.setAuthorName("William");
 		macbeth.setAuthorSurname("Shakespeare");
 		macbeth.setTitle("Hamlet");
 		macbeth.setYearOfPublication(1970);
 		bookManagerImpl.addBook(macbeth);
 
-		Book bookToUpdate = bookManagerImpl.getBookById(1);
+		Book bookToUpdate = bookManagerImpl.getBookById(bookId);
 		
 		
 		bookToUpdate.setTitle("Macbeth");

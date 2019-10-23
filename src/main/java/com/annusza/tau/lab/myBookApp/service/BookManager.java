@@ -13,17 +13,19 @@ public interface BookManager {
 
 	public Book getBookById(int id) throws Exception;
 
-	public Book updateBook(Book book) throws Exception;
+	public void updateBook(Book book) throws Exception;
 
 	public void deleteBook(int id) throws Exception;
 
 	public List<Book> getAllBooks() throws Exception;
 
-	public void setTimeOfRead(LocalDateTime mockDate, TheTime theTime);
+	//public void setTimeOfRead(Book book);
 
 	public void setTimeOfCreation(Book book) throws Exception;
 
-	public LocalDateTime getActualDate() throws Exception;
+	public LocalDateTime getCurrentDateTime() throws Exception;
 	
-	public void setTimeOfLastUpdate(Book book) throws Exception;
+//	public LocalDateTime getTimeOfUpdate() throws Exception;
+	
+	public void setTimeOfUpdate(Book book) throws Exception;
 }

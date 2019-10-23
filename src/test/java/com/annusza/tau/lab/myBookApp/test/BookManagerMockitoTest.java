@@ -48,7 +48,7 @@ public class BookManagerMockitoTest {
 
 		BookManagerImpl bookManagerImpl = spy(BookManagerImpl.class);
 
-		when((bookManagerImpl).getActualDate()).thenReturn(mockDate);
+		when((bookManagerImpl).getCurrentDateTime()).thenReturn(mockDate);
 
 		Book book1 = new Book();
 		final int id = 1;
@@ -70,24 +70,49 @@ public class BookManagerMockitoTest {
 	public void mockitoTestOfUpdatingDateDuringUpdateBook() throws Exception {
 
 		BookManagerImpl bookManagerImpl = spy(BookManagerImpl.class);
-		when((bookManagerImpl).getActualDate()).thenReturn(mockDate);
+		when((bookManagerImpl).getCurrentDateTime()).thenReturn(mockDate);
 
-		Book book1 = new Book();
+		Book book = new Book();
 		final int id = 2;
-		book1.setId(id);
-		book1.setAuthorName("Włodzimierz");
-		book1.setAuthorSurname("Odojewski");
-		book1.setTitle("Zasypie wszystko, zawieje");
-		book1.setYearOfPublication(2000);
-		book1.setCreateRowTime(LocalDateTime.of(2013, 10, 12, 20, 00));
-		bookManagerImpl.addBook(book1);
+		book.setId(id);
+		book.setAuthorName("Włodzimierz");
+		book.setAuthorSurname("Odojewski");
+		book.setTitle("Zasypie wszystko, zawieje");
+		book.setYearOfPublication(2000);
+		bookManagerImpl.addBook(book);
 
-		Book book2 = bookManagerImpl.getBookById(id);
-		bookManagerImpl.setTimeOfLastUpdate(book2);
-		verify(bookManagerImpl, times(1)).setTimeOfLastUpdate(book1);
-		Assert.assertNotNull("Ustawiona jest data odczytu rekordu", book2.getUpdateRowTime());
-		
-		
+		// update Book
+		book.setTitle("Wyspa ocalenia");
+		bookManagerImpl.updateBook(book);
+
+		// weryfikacja 1) czy BookManagerImpl razy jeden zawołał setTimeOfUpdate
+		// z argumentem book
+		verify(bookManagerImpl, times(1)).setTimeOfUpdate(book);
+
+		// weryfikacja 2) metoda ustawiła updateRowTime
+		Assert.assertNotNull("Ustawiona jest data aktualizacji rekordu", book.getUpdateRowTime());
+
+	}
+
+	// 2 - test sposobu ustawiania daty przy odczycie rekordu
+	@Test
+	public void mockitoTestOfLastReadRowTimeDuringUsingGetBookById() throws Exception {
+
+//		BookManagerImpl bookManagerImpl = spy(BookManagerImpl.class);
+//		when((bookManagerImpl).getCurrentDateTime()).thenReturn(mockDate);
+//
+//		Book anneOfGreenGables = new Book();
+//		final int id = 3;
+//		anneOfGreenGables.setId(id);
+//		anneOfGreenGables.setAuthorName("Lucy Maud");
+//		anneOfGreenGables.setAuthorSurname("Montgomery");
+//		anneOfGreenGables.setTitle("Annie of the Green Gables");
+//		anneOfGreenGables.setYearOfPublication(1997);
+//		bookManagerImpl.addBook(anneOfGreenGables);
+//
+//		
+//		verify(bookManagerImpl, times(1)).setTimeOfRead(anneOfGreenGables);
+//		Assert.assertNotNull("Ustawiona jest data odczytu rekordu", anneOfGreenGables.getReadRowTime());
 	}
 
 }
