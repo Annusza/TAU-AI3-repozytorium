@@ -98,21 +98,23 @@ public class BookManagerMockitoTest {
 	@Test
 	public void mockitoTestOfLastReadRowTimeDuringUsingGetBookById() throws Exception {
 
-//		BookManagerImpl bookManagerImpl = spy(BookManagerImpl.class);
-//		when((bookManagerImpl).getCurrentDateTime()).thenReturn(mockDate);
-//
-//		Book anneOfGreenGables = new Book();
-//		final int id = 3;
-//		anneOfGreenGables.setId(id);
-//		anneOfGreenGables.setAuthorName("Lucy Maud");
-//		anneOfGreenGables.setAuthorSurname("Montgomery");
-//		anneOfGreenGables.setTitle("Annie of the Green Gables");
-//		anneOfGreenGables.setYearOfPublication(1997);
-//		bookManagerImpl.addBook(anneOfGreenGables);
-//
-//		
-//		verify(bookManagerImpl, times(1)).setTimeOfRead(anneOfGreenGables);
-//		Assert.assertNotNull("Ustawiona jest data odczytu rekordu", anneOfGreenGables.getReadRowTime());
+		BookManagerImpl bookManagerImpl = spy(BookManagerImpl.class);
+		when((bookManagerImpl).getCurrentDateTime()).thenReturn(mockDate);
+
+		Book anneOfGreenGables = new Book();
+		final int id = 3;
+		anneOfGreenGables.setId(id);
+		anneOfGreenGables.setAuthorName("Lucy Maud");
+		anneOfGreenGables.setAuthorSurname("Montgomery");
+		anneOfGreenGables.setTitle("Annie of the Green Gables");
+		anneOfGreenGables.setYearOfPublication(1997);
+		bookManagerImpl.addBook(anneOfGreenGables);
+		
+		Book nextBook = bookManagerImpl.getBookById(id);
+
+		verify(bookManagerImpl, times(1)).setTimeOfRead(nextBook);
+		
+		Assert.assertNotNull("Ustawiona jest data odczytu rekordu", nextBook.getReadRowTime());
 	}
 
 }

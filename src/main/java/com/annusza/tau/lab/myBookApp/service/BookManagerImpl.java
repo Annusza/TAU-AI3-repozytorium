@@ -25,13 +25,21 @@ public class BookManagerImpl implements BookManager {
 			if (book.getId() == id) {
 
 				Book book2 = clone(book);
+				setTimeOfRead(book2);
 				return book2;
 			}
 		}
 		return null;
 	}
 
-	private Book clone(Book book) {
+	@Override
+	public void setTimeOfRead(Book book) throws Exception {
+
+		book.setReadRowTime(getCurrentDateTime());
+
+	}
+
+	private Book clone(Book book) throws Exception {
 
 		Book book2 = new Book();
 
@@ -44,7 +52,7 @@ public class BookManagerImpl implements BookManager {
 		book2.setUpdateRowTime(book.getUpdateRowTime());
 		book2.setReadRowTime(book.getReadRowTime());
 
-		setTimeOfRead(book2);
+		// setTimeOfRead(book2);
 		return book2;
 	}
 
@@ -124,12 +132,6 @@ public class BookManagerImpl implements BookManager {
 	public void setTimeOfCreation(Book book) throws Exception {
 
 		book.setCreateRowTime(getCurrentDateTime());
-
-	}
-
-	private void setTimeOfRead(Book book) {
-
-		book.setReadRowTime(getCurrentDateTime());
 
 	}
 
