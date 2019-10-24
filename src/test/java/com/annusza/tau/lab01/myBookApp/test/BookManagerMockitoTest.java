@@ -16,9 +16,6 @@ import org.junit.runners.JUnit4;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -162,8 +159,8 @@ public class BookManagerMockitoTest {
 		}
 	}
 
-	// 5 - test metody pozwalającej na uzyskanie informacji o rekordzie
-	// (poszczególnych znacznikach czasowych)
+	// 5 - test metody pozwalającej na uzyskanie informacji o poszczególnych
+	// znacznikach czasowych
 	@Test
 	public void mockitoTestGetDateTimeFlagsShouldReturnInformationAboutDateTime() throws Exception {
 
@@ -188,6 +185,159 @@ public class BookManagerMockitoTest {
 		Assert.assertNotNull("Ustawione są flagi czasowe: data i czas tworzenia rekordu", bookWithDateTimeFlags.getCreateRowDateTime());
 		Assert.assertNotNull("Ustawione są flagi czasowe: data i czas aktualizacji rekordu", bookWithDateTimeFlags.getUpdateRowDateTime());
 		Assert.assertNotNull("Ustawione są flagi czasowe: data i czas odczytu rekordu", bookWithDateTimeFlags.getReadRowDateTime());
+	}
+
+	// 6 - test metody do włączania/wyłączania zapisywania poszczególnych
+	// znaczników czasowych
+
+	// test save on
+	@Test
+	public void mockitoTestIsTurnOnSaveDateTimeOfCreateWOrking() throws Exception {
+
+		BookManagerImpl bookManagerImpl = spy(BookManagerImpl.class);
+		when((bookManagerImpl).getCurrentDateTime()).thenReturn(mockDate);
+
+		Book doll = new Book();
+		final int id = 1;
+		doll.setId(id);
+		doll.setAuthorName("Bolesław");
+		doll.setAuthorSurname("Prus");
+		doll.setTitle("The doll");
+		doll.setYearOfPublication(1956);
+		doll.setCreateRowTime(mockDate);
+		doll.setUpdateRowTime(mockDate);
+		doll.setReadRowTime(mockDate);
+		doll.setSaveDateTimeOfCreate(false);
+		bookManagerImpl.turnOnSaveDateTimeOfCreate(doll);
+
+		verify(bookManagerImpl, times(0)).turnOffSaveDateTimeOfCreate(doll);
+		Assert.assertNotNull("Uruchamiana jest opcja włączenia czasu dodania rektordu do bazy", doll.isSaveDateTimeOfCreate());
+	}
+
+	// test save off
+	@Test
+	public void mockitoTestIsTurnOffSaveDateTimeOfCreateWorking() throws Exception {
+
+		BookManagerImpl bookManagerImpl = spy(BookManagerImpl.class);
+		when((bookManagerImpl).getCurrentDateTime()).thenReturn(mockDate);
+
+		Book pharaoh = new Book();
+		final int id = 2;
+		pharaoh.setId(id);
+		pharaoh.setAuthorName("Bolesław");
+		pharaoh.setAuthorSurname("Prus");
+		pharaoh.setTitle("Pharaoh");
+		pharaoh.setYearOfPublication(1977);
+		pharaoh.setCreateRowTime(mockDate);
+		pharaoh.setUpdateRowTime(mockDate);
+		pharaoh.setReadRowTime(mockDate);
+		pharaoh.setSaveDateTimeOfCreate(true);
+		bookManagerImpl.turnOffSaveDateTimeOfCreate(pharaoh);
+
+		verify(bookManagerImpl, times(0)).turnOnSaveDateTimeOfCreate(pharaoh);
+		Assert.assertNotNull("Uruchamiana jest opcja wyłączenia czasu dodania rektordu do bazy", pharaoh.isSaveDateTimeOfCreate());
+	}
+
+	// test update on
+	@Test
+	public void mockitoTestIsTurnOnSaveDateTimeOfUpdateWorking() throws Exception {
+
+		BookManagerImpl bookManagerImpl = spy(BookManagerImpl.class);
+		when((bookManagerImpl).getCurrentDateTime()).thenReturn(mockDate);
+
+		Book emancipationists = new Book();
+		final int id = 3;
+		emancipationists.setId(id);
+		emancipationists.setAuthorName("Bolesław");
+		emancipationists.setAuthorSurname("Prus");
+		emancipationists.setTitle("Emancipacionists");
+		emancipationists.setYearOfPublication(1985);
+		emancipationists.setCreateRowTime(mockDate);
+		emancipationists.setUpdateRowTime(mockDate);
+		emancipationists.setReadRowTime(mockDate);
+		emancipationists.setSaveDateTimeOfUpdate(false);
+		bookManagerImpl.turnOnSaveDateTimeOfUpdate(emancipationists);
+		;
+
+		verify(bookManagerImpl, times(0)).turnOffSaveDateTimeOfUpdate(emancipationists);
+		Assert.assertNotNull("Uruchamiana jest opcja aktualizacji czasu dodania rektordu do bazy", emancipationists.isSaveDateTimeOfCreate());
+
+	}
+
+	// test update off
+	@Test
+	public void mockitoTestIsTurnOffSaveDateTimeOfUpdateWorking() throws Exception {
+
+		BookManagerImpl bookManagerImpl = spy(BookManagerImpl.class);
+		when((bookManagerImpl).getCurrentDateTime()).thenReturn(mockDate);
+
+		Book children = new Book();
+		final int id = 4;
+		children.setId(id);
+		children.setAuthorName("Bolesław");
+		children.setAuthorSurname("Prus");
+		children.setTitle("Children");
+		children.setYearOfPublication(1960);
+		children.setCreateRowTime(mockDate);
+		children.setUpdateRowTime(mockDate);
+		children.setReadRowTime(mockDate);
+		children.setSaveDateTimeOfUpdate(true);
+		bookManagerImpl.turnOffSaveDateTimeOfUpdate(children);
+
+		verify(bookManagerImpl, times(0)).turnOnSaveDateTimeOfUpdate(children);
+		Assert.assertNotNull("Uruchamiana jest opcja aktualizacji czasu dodania rektordu do bazy", children.isSaveDateTimeOfCreate());
+
+	}
+
+	// test read on
+	@Test
+	public void mockitoTestIsTurnOnSaveDateTimeOfReadWorking() throws Exception {
+
+		BookManagerImpl bookManagerImpl = spy(BookManagerImpl.class);
+		when((bookManagerImpl).getCurrentDateTime()).thenReturn(mockDate);
+
+		Book shadows = new Book();
+		final int id = 5;
+		shadows.setId(id);
+		shadows.setAuthorName("Bolesław");
+		shadows.setAuthorSurname("Prus");
+		shadows.setTitle("Shadows");
+		shadows.setYearOfPublication(1966);
+		shadows.setCreateRowTime(mockDate);
+		shadows.setUpdateRowTime(mockDate);
+		shadows.setReadRowTime(mockDate);
+		shadows.setSaveDateTimeOfRead(false);
+		bookManagerImpl.turnOnSaveDateTimeOfRead(shadows);
+		;
+
+		verify(bookManagerImpl, times(0)).turnOffSaveDateTimeOfRead(shadows);
+		Assert.assertNotNull("Uruchamiana jest opcja aktualizacji czasu dodania rektordu do bazy", shadows.isSaveDateTimeOfRead());
+
+	}
+
+	// test read off
+	@Test
+	public void mockitoTestIsTurnOffSaveDateTimeOfReadWorking() throws Exception {
+
+		BookManagerImpl bookManagerImpl = spy(BookManagerImpl.class);
+		when((bookManagerImpl).getCurrentDateTime()).thenReturn(mockDate);
+
+		Book mistake = new Book();
+		final int id = 6;
+		mistake.setId(id);
+		mistake.setAuthorName("Bolesław");
+		mistake.setAuthorSurname("Prus");
+		mistake.setTitle("Mistake");
+		mistake.setYearOfPublication(1991);
+		mistake.setCreateRowTime(mockDate);
+		mistake.setUpdateRowTime(mockDate);
+		mistake.setReadRowTime(mockDate);
+		mistake.setSaveDateTimeOfRead(true);
+		bookManagerImpl.turnOffSaveDateTimeOfRead(mistake);
+
+		verify(bookManagerImpl, times(0)).turnOnSaveDateTimeOfRead(mistake);
+		Assert.assertNotNull("Uruchamiana jest opcja aktualizacji czasu dodania rektordu do bazy", mistake.isSaveDateTimeOfRead());
+
 	}
 
 }

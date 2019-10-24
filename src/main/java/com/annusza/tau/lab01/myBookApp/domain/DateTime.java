@@ -3,7 +3,7 @@ package com.annusza.tau.lab01.myBookApp.domain;
 import java.time.LocalDateTime;
 import java.util.Date;
 
-public abstract class TheTime {
+public abstract class DateTime {
 
 	private LocalDateTime createRowTime;
 	private LocalDateTime updateRowTime;

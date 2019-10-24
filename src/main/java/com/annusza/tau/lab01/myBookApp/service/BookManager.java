@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.annusza.tau.lab01.myBookApp.domain.Book;
-import com.annusza.tau.lab01.myBookApp.domain.TheTime;
+import com.annusza.tau.lab01.myBookApp.domain.DateTime;
 
 public interface BookManager {
 
@@ -30,7 +30,21 @@ public interface BookManager {
 
 	public void setDateTimeOfUpdate(Book book) throws Exception;
 
-	Book getInformationAboutBookDateTime(Book book) throws Exception;
+	public Book getInformationAboutBookDateTime(Book book) throws Exception;
 
-	void setInformationAboutBookDateTime(Book book) throws Exception;
+	public void setInformationAboutBookDateTime(Book book) throws Exception;
+
+	// TIME
+
+	public void turnOnSaveDateTimeOfRead(Book book) throws Exception;
+
+	public void turnOffSaveDateTimeOfRead(Book book) throws Exception;
+
+	public void turnOnSaveDateTimeOfCreate(Book book) throws Exception;
+
+	public void turnOffSaveDateTimeOfCreate(Book book) throws Exception;
+
+	public void turnOnSaveDateTimeOfUpdate(Book book) throws Exception;
+
+	public void turnOffSaveDateTimeOfUpdate(Book book) throws Exception;
 }

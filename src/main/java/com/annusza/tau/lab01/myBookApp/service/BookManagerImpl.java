@@ -34,19 +34,19 @@ public class BookManagerImpl implements BookManager {
 
 	private Book clone(Book book) throws Exception {
 
-		Book book2 = new Book();
+		Book cloneOfBook = new Book();
 
-		book2.setId(book.getId());
-		book2.setAuthorName(book.getAuthorName());
-		book2.setAuthorSurname(book.getAuthorSurname());
-		book2.setTitle(book.getTitle());
-		book2.setYearOfPublication(book.getYearOfPublication());
-		book2.setCreateRowTime(book.getCreateRowDateTime());
-		book2.setUpdateRowTime(book.getUpdateRowDateTime());
-		book2.setReadRowTime(book.getReadRowDateTime());
+		cloneOfBook.setId(book.getId());
+		cloneOfBook.setAuthorName(book.getAuthorName());
+		cloneOfBook.setAuthorSurname(book.getAuthorSurname());
+		cloneOfBook.setTitle(book.getTitle());
+		cloneOfBook.setYearOfPublication(book.getYearOfPublication());
+		cloneOfBook.setCreateRowTime(book.getCreateRowDateTime());
+		cloneOfBook.setUpdateRowTime(book.getUpdateRowDateTime());
+		cloneOfBook.setReadRowTime(book.getReadRowDateTime());
 
 		// setTimeOfRead(book2);
-		return book2;
+		return cloneOfBook;
 	}
 
 	@Override
@@ -151,6 +151,56 @@ public class BookManagerImpl implements BookManager {
 		setDateTimeOfCreation(book);
 		setDateTimeOfUpdate(book);
 		setDateTimeOfRead(book);
+
+	}
+
+	// TIME
+
+	// create ON
+	@Override
+	public void turnOnSaveDateTimeOfCreate(Book book) throws Exception {
+
+		book.saveDateTimeOfCreate = true;
+
+	}
+
+	// create OFF
+	@Override
+	public void turnOffSaveDateTimeOfCreate(Book book) throws Exception {
+
+		book.saveDateTimeOfCreate = false;
+
+	}
+
+	// update ON
+	@Override
+	public void turnOnSaveDateTimeOfUpdate(Book book) throws Exception {
+
+		book.saveDateTimeOfUpdate = true;
+
+	}
+
+	// update OFF
+	@Override
+	public void turnOffSaveDateTimeOfUpdate(Book book) throws Exception {
+
+		book.saveDateTimeOfUpdate = false;
+
+	}
+
+	// read ON
+	@Override
+	public void turnOnSaveDateTimeOfRead(Book book) throws Exception {
+
+		book.saveDateTimeOfRead = true;
+
+	}
+
+	// read OFF
+	@Override
+	public void turnOffSaveDateTimeOfRead(Book book) throws Exception {
+
+		book.saveDateTimeOfRead = false;
 
 	}
 
