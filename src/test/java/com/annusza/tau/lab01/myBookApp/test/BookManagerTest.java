@@ -87,15 +87,12 @@ public class BookManagerTest {
 		bookManagerImpl.addBook(macbeth);
 
 		Book bookToUpdate = bookManagerImpl.getBookById(bookId);
-		
-		
+
 		bookToUpdate.setTitle("Macbeth");
 		macbeth.setTitle(bookToUpdate.getTitle());
 		bookManagerImpl.updateBook(macbeth);
 
-		assertEquals( bookManagerImpl.getBookById(1).getTitle(), bookToUpdate.getTitle());
+		assertEquals(bookManagerImpl.getBookById(1).getTitle(), bookToUpdate.getTitle());
 	}
-
-	
 
 }

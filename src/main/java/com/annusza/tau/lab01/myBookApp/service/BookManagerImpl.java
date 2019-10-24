@@ -10,10 +10,18 @@ public class BookManagerImpl implements BookManager {
 
 	List<Book> books = new ArrayList<Book>();
 
+	public boolean saveDateTimeOfCreate = true;
+	public boolean saveDateTimeOfUpdate = true;
+	public boolean saveDateTimeOfRead = true;
+
 	@Override
 	public void addBook(Book book) throws Exception {
 
-		setDateTimeOfCreation(book);
+		if (isSaveDateTimeOfCreate()) {
+
+			setDateTimeOfCreation(book);
+
+		}
 		books.add(book);
 
 	}
@@ -25,7 +33,12 @@ public class BookManagerImpl implements BookManager {
 			if (book.getId() == id) {
 
 				Book book2 = clone(book);
-				setDateTimeOfRead(book2);
+
+				if (isSaveDateTimeOfRead()) {
+
+					setDateTimeOfRead(book2);
+				}
+
 				return book2;
 			}
 		}
@@ -43,9 +56,7 @@ public class BookManagerImpl implements BookManager {
 		cloneOfBook.setYearOfPublication(book.getYearOfPublication());
 		cloneOfBook.setCreateRowTime(book.getCreateRowDateTime());
 		cloneOfBook.setUpdateRowTime(book.getUpdateRowDateTime());
-		cloneOfBook.setReadRowTime(book.getReadRowDateTime());
 
-		// setTimeOfRead(book2);
 		return cloneOfBook;
 	}
 
@@ -96,11 +107,12 @@ public class BookManagerImpl implements BookManager {
 			bookToUpdate.setId(book.getId());
 			bookToUpdate.setYearOfPublication(book.getYearOfPublication());
 			bookToUpdate.setTime(book.getTime());
-			bookToUpdate.setCreateRowTime(book.getCreateRowDateTime());
-			bookToUpdate.setUpdateRowTime(book.getUpdateRowDateTime());
-			bookToUpdate.setReadRowTime(book.getReadRowDateTime());
 
-			setDateTimeOfUpdate(bookToUpdate);
+			if (isSaveDateTimeOfUpdate()) {
+
+				setDateTimeOfUpdate(bookToUpdate);
+
+			}
 
 		} else {
 
@@ -154,54 +166,40 @@ public class BookManagerImpl implements BookManager {
 
 	}
 
-	// TIME
-
-	// create ON
 	@Override
-	public void turnOnSaveDateTimeOfCreate(Book book) throws Exception {
+	public boolean isSaveDateTimeOfCreate() {
 
-		book.saveDateTimeOfCreate = true;
-
+		return saveDateTimeOfCreate;
 	}
 
-	// create OFF
 	@Override
-	public void turnOffSaveDateTimeOfCreate(Book book) throws Exception {
+	public void setSaveDateTimeOfCreate(boolean saveDateTimeOfCreate) {
 
-		book.saveDateTimeOfCreate = false;
-
+		this.saveDateTimeOfCreate = saveDateTimeOfCreate;
 	}
 
-	// update ON
 	@Override
-	public void turnOnSaveDateTimeOfUpdate(Book book) throws Exception {
+	public boolean isSaveDateTimeOfUpdate() {
 
-		book.saveDateTimeOfUpdate = true;
-
+		return saveDateTimeOfUpdate;
 	}
 
-	// update OFF
 	@Override
-	public void turnOffSaveDateTimeOfUpdate(Book book) throws Exception {
+	public void setSaveDateTimeOfUpdate(boolean saveDateTimeOfUpdate) {
 
-		book.saveDateTimeOfUpdate = false;
-
+		this.saveDateTimeOfUpdate = saveDateTimeOfUpdate;
 	}
 
-	// read ON
 	@Override
-	public void turnOnSaveDateTimeOfRead(Book book) throws Exception {
+	public boolean isSaveDateTimeOfRead() {
 
-		book.saveDateTimeOfRead = true;
-
+		return saveDateTimeOfRead;
 	}
 
-	// read OFF
 	@Override
-	public void turnOffSaveDateTimeOfRead(Book book) throws Exception {
+	public void setSaveDateTimeOfRead(boolean saveDateTimeOfRead) {
 
-		book.saveDateTimeOfRead = false;
-
+		this.saveDateTimeOfRead = saveDateTimeOfRead;
 	}
 
 }

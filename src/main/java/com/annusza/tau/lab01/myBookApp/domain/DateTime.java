@@ -38,5 +38,4 @@ public abstract class DateTime {
 
 		this.readRowTime = readRowTime;
 	}
-
 }

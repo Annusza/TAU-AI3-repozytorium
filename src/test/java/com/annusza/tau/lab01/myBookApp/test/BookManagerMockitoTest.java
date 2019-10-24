@@ -1,8 +1,10 @@
 package com.annusza.tau.lab01.myBookApp.test;
 
 import com.annusza.tau.lab01.myBookApp.domain.Book;
+import com.annusza.tau.lab01.myBookApp.domain.DateTime;
 import com.annusza.tau.lab01.myBookApp.service.BookManagerImpl;
 
+import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -38,6 +40,141 @@ public class BookManagerMockitoTest {
 	public void setup() {
 
 		assertNotNull(mockDate);
+
+	}
+
+	// 6 - testy włączania/wyłączania zapisywania poszczególnych znaczników
+	// czasowych
+
+	// test save on/off
+	@Test
+	public void mockitoTestIsTurnOnOffSaveDateTimeOfCreateWOrking() throws Exception {
+
+		boolean[] array = { true, false };
+		for (int i = 0; i < array.length; i++) {
+
+			BookManagerImpl bookManagerImpl = spy(BookManagerImpl.class);
+			when((bookManagerImpl).getCurrentDateTime()).thenReturn(mockDate);
+
+			boolean saveDateTimeOfCreate = array[i];
+			bookManagerImpl.setSaveDateTimeOfCreate(saveDateTimeOfCreate);
+
+			Book doll = new Book();
+			final int id = i + 1;
+			doll.setId(id);
+			doll.setAuthorName("Bolesław");
+			doll.setAuthorSurname("Prus");
+			doll.setTitle("The doll");
+			doll.setYearOfPublication(1956);
+			bookManagerImpl.addBook(doll);
+
+			int howManyTimes = saveDateTimeOfCreate ? 1 : 0;
+			verify(bookManagerImpl, times(1)).isSaveDateTimeOfCreate();
+			verify(bookManagerImpl, times(howManyTimes)).setDateTimeOfCreation(doll);
+
+			if (saveDateTimeOfCreate) {
+
+				Assert.assertNotNull("Przy włączonym zapisywaniu znacznika czasowego dodania znacznik jest zapisywany", doll.getCreateRowDateTime());
+			} else {
+
+				Assert.assertNull("Przy wyłączonym zapisywaniu znacznika czasowego dodania znacznik nie jest zapisywany", doll.getCreateRowDateTime());
+			}
+
+			LocalDateTime expected = saveDateTimeOfCreate ? mockDate : null;
+			LocalDateTime actual = doll.getCreateRowDateTime();
+			assertEquals("Znacznik czasowy dodania jest zapisywany zgodnie z ustawieniem", expected, actual);
+		}
+
+	}
+
+	// test update on/off
+	@Test
+	public void mockitoTestIsTurnOnOffSaveDateTimeOfUpdateWorking() throws Exception {
+
+		boolean[] array = { true, false };
+		for (int i = 0; i < array.length; i++) {
+
+			BookManagerImpl bookManagerImpl = spy(BookManagerImpl.class);
+			when((bookManagerImpl).getCurrentDateTime()).thenReturn(mockDate);
+
+			boolean saveDateTimeOfUpdate = array[i];
+			bookManagerImpl.setSaveDateTimeOfUpdate(saveDateTimeOfUpdate);
+
+			Book pharaoh = new Book();
+			final int id = i + 1;
+			pharaoh.setId(id);
+			pharaoh.setAuthorName("Bolesław");
+			pharaoh.setAuthorSurname("Prus");
+			pharaoh.setTitle("The Pharaoh");
+			pharaoh.setYearOfPublication(1978);
+			bookManagerImpl.addBook(pharaoh);
+
+			pharaoh.setYearOfPublication(1989);
+			bookManagerImpl.updateBook(pharaoh);
+
+			int howManyTimes = saveDateTimeOfUpdate ? 1 : 0;
+			verify(bookManagerImpl, times(1)).isSaveDateTimeOfUpdate();
+			verify(bookManagerImpl, times(howManyTimes)).setDateTimeOfUpdate(pharaoh);
+
+			if (saveDateTimeOfUpdate) {
+
+				Assert.assertNotNull("Przy włączonym zapisywaniu znacznika czasowego aktualizacji znacznik jest zapisywany", pharaoh.getUpdateRowDateTime());
+			} else {
+
+				Assert.assertNull("Przy wyłączonym zapisywaniu znacznika czasowego aktualizacji znacznik nie jest zapisywany", pharaoh.getUpdateRowDateTime());
+			}
+
+			LocalDateTime expected = saveDateTimeOfUpdate ? mockDate : null;
+			LocalDateTime actual = pharaoh.getUpdateRowDateTime();
+			assertEquals("Znacznik czasowy dodania jest zapisywany zgodnie z ustawieniem", expected, actual);
+
+		}
+
+	}
+
+	// test read on/off
+	@Test
+	public void mockitoTestIsTurnOnOffSaveDateTimeOfReadWorking() throws Exception {
+
+		boolean[] array = { true, false };
+		for (int i = 0; i < array.length; i++) {
+
+			BookManagerImpl bookManagerImpl = spy(BookManagerImpl.class);
+			when((bookManagerImpl).getCurrentDateTime()).thenReturn(mockDate);
+
+			boolean saveDateTimeOfRead = array[i];
+			bookManagerImpl.setSaveDateTimeOfRead(saveDateTimeOfRead);
+
+			Book emancipationists = new Book();
+			final int id = i + 1;
+			emancipationists.setId(id);
+			emancipationists.setAuthorName("Bolesław");
+			emancipationists.setAuthorSurname("Prus");
+			emancipationists.setTitle("Emancipationist");
+			emancipationists.setYearOfPublication(1986);
+			bookManagerImpl.addBook(emancipationists);
+
+			Book anotherPrusBook = bookManagerImpl.getBookById(id);
+
+			int howManyTimes = saveDateTimeOfRead ? 1 : 0;
+			verify(bookManagerImpl, times(1)).isSaveDateTimeOfRead();
+			verify(bookManagerImpl, times(howManyTimes)).setDateTimeOfRead(anotherPrusBook);
+
+			if (saveDateTimeOfRead) {
+
+				Assert.assertNotNull("Przy włączonym zapisywaniu znacznika czasowego odczytania znacznik jest zapisywany",
+						anotherPrusBook.getReadRowDateTime());
+			} else {
+
+				Assert.assertNull("Przy wyłączonym zapisywaniu znacznika czasowego odczytania znacznik nie jest zapisywany",
+						anotherPrusBook.getReadRowDateTime());
+			}
+
+			LocalDateTime expected = saveDateTimeOfRead ? mockDate : null;
+			LocalDateTime actual = anotherPrusBook.getReadRowDateTime();
+			assertEquals("Znacznik czasowy dodania jest zapisywany zgodnie z ustawieniem", expected, actual);
+
+		}
 
 	}
 
@@ -116,7 +253,7 @@ public class BookManagerMockitoTest {
 		Assert.assertNotNull("Ustawiona jest data odczytu rekordu", nextBook.getReadRowDateTime());
 	}
 
-	// 2b - test sposobu ustawiania daty przy odczycie rekordu getById
+	// 2b - test sposobu ustawiania daty przy odczycie rekordu getAll
 	@Test
 	public void mockitoTestOfLastReadRowDateTimeDuringUsingGetAll() throws Exception {
 
@@ -174,170 +311,18 @@ public class BookManagerMockitoTest {
 		madameBovary.setAuthorSurname("Flaubert");
 		madameBovary.setTitle("Madame Bovary");
 		madameBovary.setYearOfPublication(1947);
-		madameBovary.setCreateRowTime(mockDate);
-		madameBovary.setUpdateRowTime(mockDate);
-		madameBovary.setReadRowTime(mockDate);
-
+		//
 		bookManagerImpl.addBook(madameBovary);
 
-		Book bookWithDateTimeFlags = bookManagerImpl.getInformationAboutBookDateTime(madameBovary);
-		verify(bookManagerImpl, times(1)).setInformationAboutBookDateTime(bookWithDateTimeFlags);
+		Book verifyBook = bookManagerImpl.getBookById(id);
+		verifyBook.setTitle("Salammbo");
+		bookManagerImpl.updateBook(verifyBook);
+
+		Book bookWithDateTimeFlags = bookManagerImpl.getBookById(id);
+
 		Assert.assertNotNull("Ustawione są flagi czasowe: data i czas tworzenia rekordu", bookWithDateTimeFlags.getCreateRowDateTime());
 		Assert.assertNotNull("Ustawione są flagi czasowe: data i czas aktualizacji rekordu", bookWithDateTimeFlags.getUpdateRowDateTime());
 		Assert.assertNotNull("Ustawione są flagi czasowe: data i czas odczytu rekordu", bookWithDateTimeFlags.getReadRowDateTime());
-	}
-
-	// 6 - test metody do włączania/wyłączania zapisywania poszczególnych
-	// znaczników czasowych
-
-	// test save on
-	@Test
-	public void mockitoTestIsTurnOnSaveDateTimeOfCreateWOrking() throws Exception {
-
-		BookManagerImpl bookManagerImpl = spy(BookManagerImpl.class);
-		when((bookManagerImpl).getCurrentDateTime()).thenReturn(mockDate);
-
-		Book doll = new Book();
-		final int id = 1;
-		doll.setId(id);
-		doll.setAuthorName("Bolesław");
-		doll.setAuthorSurname("Prus");
-		doll.setTitle("The doll");
-		doll.setYearOfPublication(1956);
-		doll.setCreateRowTime(mockDate);
-		doll.setUpdateRowTime(mockDate);
-		doll.setReadRowTime(mockDate);
-		doll.setSaveDateTimeOfCreate(false);
-		bookManagerImpl.turnOnSaveDateTimeOfCreate(doll);
-
-		verify(bookManagerImpl, times(0)).turnOffSaveDateTimeOfCreate(doll);
-		Assert.assertNotNull("Uruchamiana jest opcja włączenia czasu dodania rektordu do bazy", doll.isSaveDateTimeOfCreate());
-	}
-
-	// test save off
-	@Test
-	public void mockitoTestIsTurnOffSaveDateTimeOfCreateWorking() throws Exception {
-
-		BookManagerImpl bookManagerImpl = spy(BookManagerImpl.class);
-		when((bookManagerImpl).getCurrentDateTime()).thenReturn(mockDate);
-
-		Book pharaoh = new Book();
-		final int id = 2;
-		pharaoh.setId(id);
-		pharaoh.setAuthorName("Bolesław");
-		pharaoh.setAuthorSurname("Prus");
-		pharaoh.setTitle("Pharaoh");
-		pharaoh.setYearOfPublication(1977);
-		pharaoh.setCreateRowTime(mockDate);
-		pharaoh.setUpdateRowTime(mockDate);
-		pharaoh.setReadRowTime(mockDate);
-		pharaoh.setSaveDateTimeOfCreate(true);
-		bookManagerImpl.turnOffSaveDateTimeOfCreate(pharaoh);
-
-		verify(bookManagerImpl, times(0)).turnOnSaveDateTimeOfCreate(pharaoh);
-		Assert.assertNotNull("Uruchamiana jest opcja wyłączenia czasu dodania rektordu do bazy", pharaoh.isSaveDateTimeOfCreate());
-	}
-
-	// test update on
-	@Test
-	public void mockitoTestIsTurnOnSaveDateTimeOfUpdateWorking() throws Exception {
-
-		BookManagerImpl bookManagerImpl = spy(BookManagerImpl.class);
-		when((bookManagerImpl).getCurrentDateTime()).thenReturn(mockDate);
-
-		Book emancipationists = new Book();
-		final int id = 3;
-		emancipationists.setId(id);
-		emancipationists.setAuthorName("Bolesław");
-		emancipationists.setAuthorSurname("Prus");
-		emancipationists.setTitle("Emancipacionists");
-		emancipationists.setYearOfPublication(1985);
-		emancipationists.setCreateRowTime(mockDate);
-		emancipationists.setUpdateRowTime(mockDate);
-		emancipationists.setReadRowTime(mockDate);
-		emancipationists.setSaveDateTimeOfUpdate(false);
-		bookManagerImpl.turnOnSaveDateTimeOfUpdate(emancipationists);
-		;
-
-		verify(bookManagerImpl, times(0)).turnOffSaveDateTimeOfUpdate(emancipationists);
-		Assert.assertNotNull("Uruchamiana jest opcja aktualizacji czasu dodania rektordu do bazy", emancipationists.isSaveDateTimeOfCreate());
-
-	}
-
-	// test update off
-	@Test
-	public void mockitoTestIsTurnOffSaveDateTimeOfUpdateWorking() throws Exception {
-
-		BookManagerImpl bookManagerImpl = spy(BookManagerImpl.class);
-		when((bookManagerImpl).getCurrentDateTime()).thenReturn(mockDate);
-
-		Book children = new Book();
-		final int id = 4;
-		children.setId(id);
-		children.setAuthorName("Bolesław");
-		children.setAuthorSurname("Prus");
-		children.setTitle("Children");
-		children.setYearOfPublication(1960);
-		children.setCreateRowTime(mockDate);
-		children.setUpdateRowTime(mockDate);
-		children.setReadRowTime(mockDate);
-		children.setSaveDateTimeOfUpdate(true);
-		bookManagerImpl.turnOffSaveDateTimeOfUpdate(children);
-
-		verify(bookManagerImpl, times(0)).turnOnSaveDateTimeOfUpdate(children);
-		Assert.assertNotNull("Uruchamiana jest opcja aktualizacji czasu dodania rektordu do bazy", children.isSaveDateTimeOfCreate());
-
-	}
-
-	// test read on
-	@Test
-	public void mockitoTestIsTurnOnSaveDateTimeOfReadWorking() throws Exception {
-
-		BookManagerImpl bookManagerImpl = spy(BookManagerImpl.class);
-		when((bookManagerImpl).getCurrentDateTime()).thenReturn(mockDate);
-
-		Book shadows = new Book();
-		final int id = 5;
-		shadows.setId(id);
-		shadows.setAuthorName("Bolesław");
-		shadows.setAuthorSurname("Prus");
-		shadows.setTitle("Shadows");
-		shadows.setYearOfPublication(1966);
-		shadows.setCreateRowTime(mockDate);
-		shadows.setUpdateRowTime(mockDate);
-		shadows.setReadRowTime(mockDate);
-		shadows.setSaveDateTimeOfRead(false);
-		bookManagerImpl.turnOnSaveDateTimeOfRead(shadows);
-		;
-
-		verify(bookManagerImpl, times(0)).turnOffSaveDateTimeOfRead(shadows);
-		Assert.assertNotNull("Uruchamiana jest opcja aktualizacji czasu dodania rektordu do bazy", shadows.isSaveDateTimeOfRead());
-
-	}
-
-	// test read off
-	@Test
-	public void mockitoTestIsTurnOffSaveDateTimeOfReadWorking() throws Exception {
-
-		BookManagerImpl bookManagerImpl = spy(BookManagerImpl.class);
-		when((bookManagerImpl).getCurrentDateTime()).thenReturn(mockDate);
-
-		Book mistake = new Book();
-		final int id = 6;
-		mistake.setId(id);
-		mistake.setAuthorName("Bolesław");
-		mistake.setAuthorSurname("Prus");
-		mistake.setTitle("Mistake");
-		mistake.setYearOfPublication(1991);
-		mistake.setCreateRowTime(mockDate);
-		mistake.setUpdateRowTime(mockDate);
-		mistake.setReadRowTime(mockDate);
-		mistake.setSaveDateTimeOfRead(true);
-		bookManagerImpl.turnOffSaveDateTimeOfRead(mistake);
-
-		verify(bookManagerImpl, times(0)).turnOnSaveDateTimeOfRead(mistake);
-		Assert.assertNotNull("Uruchamiana jest opcja aktualizacji czasu dodania rektordu do bazy", mistake.isSaveDateTimeOfRead());
-
 	}
 
 }

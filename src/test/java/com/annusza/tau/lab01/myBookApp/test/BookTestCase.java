@@ -21,5 +21,4 @@ public class BookTestCase extends TestCase {
 
 		assertTrue(true);
 	}
-
 }

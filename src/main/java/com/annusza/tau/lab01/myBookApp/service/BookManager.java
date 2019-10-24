@@ -20,8 +20,6 @@ public interface BookManager {
 
 	public List<Book> getAllBooks() throws Exception;
 
-	//
-
 	public void setDateTimeOfRead(Book book) throws Exception;
 
 	public void setDateTimeOfCreation(Book book) throws Exception;
@@ -34,17 +32,16 @@ public interface BookManager {
 
 	public void setInformationAboutBookDateTime(Book book) throws Exception;
 
-	// TIME
+	boolean isSaveDateTimeOfRead();
 
-	public void turnOnSaveDateTimeOfRead(Book book) throws Exception;
+	void setSaveDateTimeOfRead(boolean saveDateTimeOfRead);
 
-	public void turnOffSaveDateTimeOfRead(Book book) throws Exception;
+	boolean isSaveDateTimeOfCreate();
 
-	public void turnOnSaveDateTimeOfCreate(Book book) throws Exception;
+	void setSaveDateTimeOfCreate(boolean saveDateTimeOfCreate);
 
-	public void turnOffSaveDateTimeOfCreate(Book book) throws Exception;
+	void setSaveDateTimeOfUpdate(boolean saveDateTimeOfUpdate);
 
-	public void turnOnSaveDateTimeOfUpdate(Book book) throws Exception;
+	boolean isSaveDateTimeOfUpdate();
 
-	public void turnOffSaveDateTimeOfUpdate(Book book) throws Exception;
 }

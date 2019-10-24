@@ -9,48 +9,7 @@ public class Book extends DateTime {
 	private String authorSurname;
 	private String title;
 	private Integer yearOfPublication;
-
 	private DateTime dateTime;
-	
-	public boolean saveDateTimeOfCreate;
-	public boolean saveDateTimeOfUpdate;
-	public boolean saveDateTimeOfRead;
-
-	
-	public boolean isSaveDateTimeOfCreate() {
-	
-		return saveDateTimeOfCreate;
-	}
-
-	
-	public void setSaveDateTimeOfCreate(boolean saveDateTimeOfCreate) {
-	
-		this.saveDateTimeOfCreate = saveDateTimeOfCreate;
-	}
-
-	
-	public boolean isSaveDateTimeOfUpdate() {
-	
-		return saveDateTimeOfUpdate;
-	}
-
-	
-	public void setSaveDateTimeOfUpdate(boolean saveDateTimeOfUpdate) {
-	
-		this.saveDateTimeOfUpdate = saveDateTimeOfUpdate;
-	}
-
-	
-	public boolean isSaveDateTimeOfRead() {
-	
-		return saveDateTimeOfRead;
-	}
-
-	
-	public void setSaveDateTimeOfRead(boolean saveDateTimeOfRead) {
-	
-		this.saveDateTimeOfRead = saveDateTimeOfRead;
-	}
 
 	public String getAuthorName() {
 
