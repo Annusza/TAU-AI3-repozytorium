@@ -160,7 +160,34 @@ public class BookManagerMockitoTest {
 			Assert.assertNotNull("Ustawiona jest data odczytu rekordu", book.getReadRowDateTime());
 
 		}
+	}
 
+	// 5 - test metody pozwalającej na uzyskanie informacji o rekordzie
+	// (poszczególnych znacznikach czasowych)
+	@Test
+	public void mockitoTestGetDateTimeFlagsShouldReturnInformationAboutDateTime() throws Exception {
+
+		BookManagerImpl bookManagerImpl = spy(BookManagerImpl.class);
+		when((bookManagerImpl).getCurrentDateTime()).thenReturn(mockDate);
+
+		Book madameBovary = new Book();
+		final int id = 7;
+		madameBovary.setId(id);
+		madameBovary.setAuthorName("Gustave");
+		madameBovary.setAuthorSurname("Flaubert");
+		madameBovary.setTitle("Madame Bovary");
+		madameBovary.setYearOfPublication(1947);
+		madameBovary.setCreateRowTime(mockDate);
+		madameBovary.setUpdateRowTime(mockDate);
+		madameBovary.setReadRowTime(mockDate);
+
+		bookManagerImpl.addBook(madameBovary);
+
+		Book bookWithDateTimeFlags = bookManagerImpl.getInformationAboutBookDateTime(madameBovary);
+		verify(bookManagerImpl, times(1)).setInformationAboutBookDateTime(bookWithDateTimeFlags);
+		Assert.assertNotNull("Ustawione są flagi czasowe: data i czas tworzenia rekordu", bookWithDateTimeFlags.getCreateRowDateTime());
+		Assert.assertNotNull("Ustawione są flagi czasowe: data i czas aktualizacji rekordu", bookWithDateTimeFlags.getUpdateRowDateTime());
+		Assert.assertNotNull("Ustawione są flagi czasowe: data i czas odczytu rekordu", bookWithDateTimeFlags.getReadRowDateTime());
 	}
 
 }

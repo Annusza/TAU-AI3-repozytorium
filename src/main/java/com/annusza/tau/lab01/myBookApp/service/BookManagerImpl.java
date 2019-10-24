@@ -32,13 +32,6 @@ public class BookManagerImpl implements BookManager {
 		return null;
 	}
 
-	@Override
-	public void setDateTimeOfRead(Book book) throws Exception {
-
-		book.setReadRowTime(getCurrentDateTime());
-
-	}
-
 	private Book clone(Book book) throws Exception {
 
 		Book book2 = new Book();
@@ -133,6 +126,31 @@ public class BookManagerImpl implements BookManager {
 	public void setDateTimeOfCreation(Book book) throws Exception {
 
 		book.setCreateRowTime(getCurrentDateTime());
+
+	}
+
+	@Override
+	public void setDateTimeOfRead(Book book) throws Exception {
+
+		book.setReadRowTime(getCurrentDateTime());
+
+	}
+
+	@Override
+	public Book getInformationAboutBookDateTime(Book book) throws Exception {
+
+		Book bookWithInformationAboutDateTime = book;
+		setInformationAboutBookDateTime(bookWithInformationAboutDateTime);
+		return bookWithInformationAboutDateTime;
+
+	}
+
+	@Override
+	public void setInformationAboutBookDateTime(Book book) throws Exception {
+
+		setDateTimeOfCreation(book);
+		setDateTimeOfUpdate(book);
+		setDateTimeOfRead(book);
 
 	}
 

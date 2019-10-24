@@ -9,6 +9,7 @@ import com.annusza.tau.lab01.myBookApp.domain.TheTime;
 
 public interface BookManager {
 
+	// CRUD
 	public void addBook(Book book) throws Exception;
 
 	public Book getBookById(int id) throws Exception;
@@ -19,6 +20,8 @@ public interface BookManager {
 
 	public List<Book> getAllBooks() throws Exception;
 
+	//
+
 	public void setDateTimeOfRead(Book book) throws Exception;
 
 	public void setDateTimeOfCreation(Book book) throws Exception;
@@ -26,4 +29,8 @@ public interface BookManager {
 	public LocalDateTime getCurrentDateTime() throws Exception;
 
 	public void setDateTimeOfUpdate(Book book) throws Exception;
+
+	Book getInformationAboutBookDateTime(Book book) throws Exception;
+
+	void setInformationAboutBookDateTime(Book book) throws Exception;
 }
