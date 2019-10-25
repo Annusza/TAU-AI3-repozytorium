@@ -201,5 +201,7 @@ public class BookManagerImpl implements BookManager {
 
 		this.saveDateTimeOfRead = saveDateTimeOfRead;
 	}
+	
+
 
 }

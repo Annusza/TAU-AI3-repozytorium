@@ -70,6 +70,7 @@ public class BookManagerMockitoTest {
 
 			int howManyTimes = saveDateTimeOfCreate ? 1 : 0;
 			verify(bookManagerImpl, times(1)).isSaveDateTimeOfCreate();
+			verify(bookManagerImpl, atLeastOnce()).isSaveDateTimeOfCreate();
 			verify(bookManagerImpl, times(howManyTimes)).setDateTimeOfCreation(doll);
 
 			if (saveDateTimeOfCreate) {
@@ -158,6 +159,7 @@ public class BookManagerMockitoTest {
 
 			int howManyTimes = saveDateTimeOfRead ? 1 : 0;
 			verify(bookManagerImpl, times(1)).isSaveDateTimeOfRead();
+			verify(bookManagerImpl, atLeast(1)).isSaveDateTimeOfRead();
 			verify(bookManagerImpl, times(howManyTimes)).setDateTimeOfRead(anotherPrusBook);
 
 			if (saveDateTimeOfRead) {
@@ -197,6 +199,7 @@ public class BookManagerMockitoTest {
 
 		Book book2 = bookManagerImpl.getBookById(id);
 		verify(bookManagerImpl, times(1)).setDateTimeOfCreation(book1);
+		verify(bookManagerImpl, atMost(1)).setDateTimeOfCreation(book1);
 		Assert.assertNotNull("Zapisywany jest czas dodania rektordu do bazy", book2.getCreateRowDateTime());
 
 	}
@@ -248,7 +251,7 @@ public class BookManagerMockitoTest {
 
 		Book nextBook = bookManagerImpl.getBookById(id);
 
-		verify(bookManagerImpl, times(1)).setDateTimeOfRead(nextBook);
+		verify(bookManagerImpl, atMost(1)).setDateTimeOfRead(nextBook);
 
 		Assert.assertNotNull("Ustawiona jest data odczytu rekordu", nextBook.getReadRowDateTime());
 	}
@@ -323,6 +326,19 @@ public class BookManagerMockitoTest {
 		Assert.assertNotNull("Ustawione są flagi czasowe: data i czas tworzenia rekordu", bookWithDateTimeFlags.getCreateRowDateTime());
 		Assert.assertNotNull("Ustawione są flagi czasowe: data i czas aktualizacji rekordu", bookWithDateTimeFlags.getUpdateRowDateTime());
 		Assert.assertNotNull("Ustawione są flagi czasowe: data i czas odczytu rekordu", bookWithDateTimeFlags.getReadRowDateTime());
+	}
+	
+	// verify only()
+	@Test
+	public void mockitoTestShoulVerifyOnlyMethodCall() throws Exception {
+		
+		BookManagerImpl bookManagerImpl = spy(BookManagerImpl.class);
+		when((bookManagerImpl).getCurrentDateTime()).thenReturn(mockDate);
+		
+		
+		Book mockBook = mock(Book.class);
+		mockBook.setAuthorName("Jan");
+		verify(mockBook, only()).setAuthorName("Jan");
 	}
 
 }
