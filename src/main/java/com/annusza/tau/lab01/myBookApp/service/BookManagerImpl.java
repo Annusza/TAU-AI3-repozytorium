@@ -3,6 +3,9 @@ package com.annusza.tau.lab01.myBookApp.service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import com.annusza.tau.lab01.myBookApp.domain.*;
 
@@ -63,9 +66,18 @@ public class BookManagerImpl implements BookManager {
 	@Override
 	public void deleteBook(int id) throws Exception {
 
-		Book book = getBookById(id);
-		if (book != null) {
-			books.remove(book);
+		Book bookToDelete = null;
+
+		for (Book book : books) {
+			if (book.getId().equals(id)) {
+
+				bookToDelete = book;
+				break;
+
+			}
+		}
+		if (bookToDelete != null) {
+			books.remove(bookToDelete);
 		}
 
 	}
@@ -201,7 +213,23 @@ public class BookManagerImpl implements BookManager {
 
 		this.saveDateTimeOfRead = saveDateTimeOfRead;
 	}
-	
 
+	@Override
+	public List<Book> findBooksByAuthorSurname(String authorSurname) {
+
+		return books.stream().filter(book -> book.getAuthorSurname().matches(authorSurname)).collect(Collectors.toList());
+	}
+
+	@Override
+	public void deleteByYears(List<Integer> yearsInt) throws Exception {
+
+		List<Book> booksToRemove = books.stream().filter(book -> yearsInt.contains(book.getYearOfPublication())).collect(Collectors.toList());
+
+		for (Book book2 : booksToRemove) {
+			deleteBook(book2.getId());
+
+		}
+
+	}
 
 }

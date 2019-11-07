@@ -71,15 +71,15 @@ public class Book extends DateTime {
 		this.dateTime = time;
 	}
 
-	@Override
-	public boolean equals(Object object) {
-
-		Book other = (Book) object;
-		boolean deliver = other.getAuthorName().equals(this.getAuthorName()) && other.getAuthorSurname().equals(this.getAuthorSurname())
-				&& other.getTitle().equals(this.getTitle()) && ((other.getId() == this.getId()) || (other.getId() == this.getId().intValue()))
-				&& ((other.getYearOfPublication() == this.getYearOfPublication())
-						|| (other.getYearOfPublication().intValue() == this.getYearOfPublication().intValue()));
-		return deliver;
-	}
+//	@Override
+//	public boolean equals(Object object) {
+//
+//		Book other = (Book) object;
+//		boolean deliver = other.getAuthorName().equals(this.getAuthorName()) && other.getAuthorSurname().equals(this.getAuthorSurname())
+//				&& other.getTitle().equals(this.getTitle()) && ((other.getId() == this.getId()) || (other.getId() == this.getId().intValue()))
+//				&& ((other.getYearOfPublication() == this.getYearOfPublication())
+//						|| (other.getYearOfPublication().intValue() == this.getYearOfPublication().intValue()));
+//		return deliver;
+//	}
 
 }

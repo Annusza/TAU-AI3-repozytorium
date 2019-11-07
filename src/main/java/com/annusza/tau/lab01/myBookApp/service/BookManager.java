@@ -3,6 +3,7 @@ package com.annusza.tau.lab01.myBookApp.service;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import com.annusza.tau.lab01.myBookApp.domain.Book;
 import com.annusza.tau.lab01.myBookApp.domain.DateTime;
@@ -43,5 +44,8 @@ public interface BookManager {
 	void setSaveDateTimeOfUpdate(boolean saveDateTimeOfUpdate);
 
 	boolean isSaveDateTimeOfUpdate();
+	
+	public List<Book> findBooksByAuthorSurname(String authorSurname);
 
+	void deleteByYears(List<Integer> yearsInt) throws Exception;
 }
