@@ -1,4 +1,4 @@
-package com.annusza.tau.lab01.myBookApp.service;
+package com.annusza.tau.service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -7,7 +7,7 @@ import java.util.Optional;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import com.annusza.tau.lab01.myBookApp.domain.*;
+import com.annusza.tau.domain.*;
 
 public class BookManagerImpl implements BookManager {
 

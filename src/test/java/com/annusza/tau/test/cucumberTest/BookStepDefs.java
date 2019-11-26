@@ -1,4 +1,4 @@
-package com.annusza.tau.lab01.myBookApp.cucumberTest;
+package com.annusza.tau.test.cucumberTest;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -9,8 +9,8 @@ import java.util.Optional;
 
 import org.junit.Assert;
 
-import com.annusza.tau.lab01.myBookApp.domain.Book;
-import com.annusza.tau.lab01.myBookApp.service.BookManagerImpl;
+import com.annusza.tau.domain.Book;
+import com.annusza.tau.service.BookManagerImpl;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;

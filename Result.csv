@@ -1,0 +1,17 @@
+timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,sentBytes,grpThreads,allThreads,URL,Latency,IdleTime,Connect
+1574733649604,278,Dodanie książki z pliku,200,OK,Wczytanie danych z pliku .csv 1-1,text,true,,262,299,1,1,http://localhost:8080/api/book,275,0,2
+1574733649883,5,Dodanie książki z pliku,200,OK,Wczytanie danych z pliku .csv 1-1,text,true,,271,308,1,1,http://localhost:8080/api/book,4,0,0
+1574733649888,4,Dodanie książki z pliku,200,OK,Wczytanie danych z pliku .csv 1-1,text,true,,269,306,1,1,http://localhost:8080/api/book,4,0,0
+1574733649892,5,Dodanie książki z pliku,200,OK,Wczytanie danych z pliku .csv 1-1,text,true,,278,315,1,1,http://localhost:8080/api/book,4,0,0
+1574733649897,4,Dodanie książki z pliku,200,OK,Wczytanie danych z pliku .csv 1-1,text,true,,263,300,1,1,http://localhost:8080/api/book,3,0,0
+1574733649901,5,Dodanie książki z pliku,200,OK,Wczytanie danych z pliku .csv 1-1,text,true,,289,326,1,1,http://localhost:8080/api/book,4,0,0
+1574733649906,4,Dodanie książki z pliku,200,OK,Wczytanie danych z pliku .csv 1-1,text,true,,280,317,1,1,http://localhost:8080/api/book,3,0,0
+1574733649910,4,Dodanie książki z pliku,200,OK,Wczytanie danych z pliku .csv 1-1,text,true,,280,317,1,1,http://localhost:8080/api/book,4,0,0
+1574733649914,4,Dodanie książki z pliku,200,OK,Wczytanie danych z pliku .csv 1-1,text,true,,267,304,1,1,http://localhost:8080/api/book,4,0,0
+1574733652096,1133,JDBC Request - DB connect,200,OK,DB connect 1-1,text,true,,21,0,1,1,null,1133,0,1127
+1574733653233,11,Dodanie książki,200,OK,Thread Group 2-1,text,true,,270,314,1,1,http://localhost:8080/api/book,10,0,1
+1574733653245,21,Pobranie wszystkich książek,200,OK,Thread Group 2-1,text,true,,1247,128,1,1,http://localhost:8080/api/books,20,0,0
+1574733653267,21,Aktualizacja książki,200,OK,Thread Group 2-1,text,true,,166,307,1,1,http://localhost:8080/api/book/2,21,0,0
+1574733653289,10,Pobranie książki,200,OK,Thread Group 2-1,text,true,,264,129,1,1,http://localhost:8080/api/book/2,8,0,0
+1574733653300,9,Usunięcie książki,200,OK,Thread Group 2-1,text,true,,166,215,1,1,http://localhost:8080/api/book/9,9,0,0
+1574733653313,2,Usunięcie wszystkich książek,200,OK,tearDown Thread Group 1-1,text,true,,10,0,1,1,null,2,0,1

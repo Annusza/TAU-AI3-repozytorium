@@ -1,4 +1,4 @@
-package com.annusza.tau.lab01.myBookApp.test;
+package com.annusza.tau.test;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

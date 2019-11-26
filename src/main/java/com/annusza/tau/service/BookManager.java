@@ -1,12 +1,12 @@
-package com.annusza.tau.lab01.myBookApp.service;
+package com.annusza.tau.service;
 
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-import com.annusza.tau.lab01.myBookApp.domain.Book;
-import com.annusza.tau.lab01.myBookApp.domain.DateTime;
+import com.annusza.tau.domain.Book;
+import com.annusza.tau.domain.DateTime;
 
 public interface BookManager {
 
@@ -21,6 +21,7 @@ public interface BookManager {
 
 	public List<Book> getAllBooks() throws Exception;
 
+	// TIME
 	public void setDateTimeOfRead(Book book) throws Exception;
 
 	public void setDateTimeOfCreation(Book book) throws Exception;
@@ -44,6 +45,8 @@ public interface BookManager {
 	void setSaveDateTimeOfUpdate(boolean saveDateTimeOfUpdate);
 
 	boolean isSaveDateTimeOfUpdate();
+	
+	//OTHER
 	
 	public List<Book> findBooksByAuthorSurname(String authorSurname);
 

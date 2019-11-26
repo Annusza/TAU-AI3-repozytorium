@@ -1,4 +1,4 @@
-package com.annusza.tau.lab01.myBookApp.cucumberTest;
+package com.annusza.tau.test.cucumberTest;
 
 import org.junit.runner.RunWith;
 

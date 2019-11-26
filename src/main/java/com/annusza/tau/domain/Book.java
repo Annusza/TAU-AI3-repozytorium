@@ -1,6 +1,7 @@
-package com.annusza.tau.lab01.myBookApp.domain;
+package com.annusza.tau.domain;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class Book extends DateTime {
 
@@ -70,6 +71,11 @@ public class Book extends DateTime {
 
 		this.dateTime = time;
 	}
+	
+//	 @Override
+//	    public int hashCode() {
+//	        return Objects.hash(id);
+//	    }
 
 //	@Override
 //	public boolean equals(Object object) {
@@ -81,5 +87,7 @@ public class Book extends DateTime {
 //						|| (other.getYearOfPublication().intValue() == this.getYearOfPublication().intValue()));
 //		return deliver;
 //	}
+	
+
 
 }
