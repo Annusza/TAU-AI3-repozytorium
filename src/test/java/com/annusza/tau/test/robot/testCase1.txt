@@ -1,0 +1,8 @@
+*** Settings ***
+Documentation A resource file containing the application specific keywords
+Library		SeleniumLibrary
+
+*** Test Cases ***
+Check out automationpractice dot com
+		Open Browser http://automationpractice.com	gc
+		Close Browser

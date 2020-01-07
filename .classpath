@@ -29,5 +29,6 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="lib/client-combined-3.141.59.jar"/>
 	<classpathentry kind="lib" path="lib/selenium-server-standalone-3.141.59.jar"/>
+	<classpathentry kind="lib" path="E:/GitHub4TAU/TAU-AI3/TAU-AI3-repozytorium/lib/tools-1.6.0.16.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

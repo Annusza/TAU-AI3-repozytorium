@@ -20,6 +20,26 @@
 	</properties>
 
 	<dependencies>
+
+		<!-- https://mvnrepository.com/artifact/org.robotframework/robotframework -->
+		<dependency>
+			<groupId>org.robotframework</groupId>
+			<artifactId>robotframework</artifactId>
+			<version>3.1.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.github.hi-fi</groupId>
+			<artifactId>robotframework-seleniumlibrary</artifactId>
+			<version>3.141.59.26535</version>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<artifactId>tools</artifactId>
+					<groupId>com.sun</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 		<dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-web-api</artifactId>
@@ -38,7 +58,7 @@
 			<version>3.1.0</version>
 			<scope>test</scope>
 		</dependency>
-<dependency>
+		<dependency>
 			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-java</artifactId>
 			<version>4.2.6</version>
@@ -54,7 +74,7 @@
 			<groupId>org.hsqldb</groupId>
 			<artifactId>hsqldb</artifactId>
 			<version>2.3.4</version>
-			<!-- <scope>runtime</scope>-->
+			<!-- <scope>runtime</scope> -->
 		</dependency>
 
 		<!-- Spring dependencies -->
@@ -91,17 +111,31 @@
 			<artifactId>jackson-core</artifactId>
 			<version>${com.fasterxml.jackson.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
 			<version>3.5.3</version>
-			
+
 		</dependency>
 	</dependencies>
 
 	<build>
 		<plugins>
+
+			<plugin>
+				<groupId>org.robotframework</groupId>
+				<artifactId>robotframework-maven-plugin</artifactId>
+				<version>1.5.2</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
